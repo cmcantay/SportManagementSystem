@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@using SportManagementSystem.Common.SessionOperations
+@*@inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> UserManager*@
+@inject SignInManager<SportManagementSystem.Data.DbModels.Employee> SignInManager
+@inject UserManager<SportManagementSystem.Data.DbModels.Employee> UserManager
+@*@inject IHttpContextAccessor HttpContextAccessor*@
+
+@*Session : @HttpContextAccessor.HttpContext.Session.GetString("AppUserInfoSession");*@
+<style>
+     </style>
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-white" asp-area="" asp-page="" title="Manage">
+        @await Component.InvokeAsync("UserName")</a>
+    </li>
+    <li class="nav-item">
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        </form>
+    </li>
+}

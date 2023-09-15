@@ -1,0 +1,80 @@
+﻿@using SportManagementSystem.Data.DbModels
+@model List<RoleAssignViewModel>
+@{
+    ViewData["Title"] = "AssignRole";
+}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <script>
+       $(document).ready(function() {
+  $('#Sporcu').change(function() {
+      console.log("aa");
+    if ($(this).is(':checked')) {
+      $('#exampleModalCenter').modal('show');
+    } else {
+      $('#exampleModalCenter').modal('hide');
+    }
+  });
+});
+        </script>
+<div style="padding:20px">
+                <h1 class="h3 mb-2 text-gray-800">Roller</h1>
+                <hr />
+<form method="post">
+    
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check"> 
+    
+                @if (Model[i].Name != "Employee")
+                {
+                <input type="hidden" asp-for="@Model[i].RoleId" />
+                <input type="hidden" asp-for="@Model[i].Name" />
+               <input type="checkbox" id="@Model[i].Name" asp-for="@Model[i].Exists" class="form-check-input" />
+               <label class="form-check-label" for="@Model[i].Exists">@Model[i].Name</label>
+               <hr>
+                }
+        </div>
+    }
+    <br />
+    <button class="btn btn-info">Değişiklikleri Kaydet</button>
+</form>
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+           <form method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><b>Sporcu Bilgilerini Giriniz.</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+            <label>Sporcu Adı</label>
+            <input type="text" id="sporcuadi" class="form-control" />
+                <label>Forma Numarası</label>
+            <input type="text" id="formanumarasi" class="form-control" />
+                <label>Pozisyon</label>
+            <input type="text" id="pozisyon" class="form-control" />
+                <label>Yaş </label>
+            <input type="text" id="yas" class="form-control" />
+               <label>Başlangıç Tarihi</label>
+            <input type="text" id="tarih" class="form-control" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary">Kaydet</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+ 
